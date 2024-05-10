@@ -14,3 +14,7 @@ app.include_router(auth.router)
 app.include_router(qa.router)
 app.include_router(user_rating.router)
 app.include_router(bid.router)
+
+app.get("/api")
+async def root():
+  return {"message": "Awesome app"}

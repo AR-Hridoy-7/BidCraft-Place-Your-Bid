@@ -1,11 +1,11 @@
-.loginsignup{
+.signup{
   width:100%;
   height:80vh;
   background: #fce3fe;
   padding-top:100px;
 
 }
-.loginsignup-container{
+.signup-container{
   width:580px;
   height:600px;
   background:white;
@@ -13,19 +13,19 @@
   padding: 40px 60px;
 
 }
-.loginsignup-container h1{
+.signup-container h1{
   margin:20px 0px;
 
 
 
 }
-.loginsignup-fields{
+.signup-fields{
   display: flex;
   flex-direction: column;
   gap:29px;
   margin-top:30px;
 }
-.loginsignup-fields input{
+.signup-fields input{
   height:72px;
   width:100%;
   padding-left:20px;
@@ -37,7 +37,7 @@
 }
 
 
-.loginsignup-container button{
+.signup-container button{
   width:580px;
   height:72px;
   color:white;
@@ -48,18 +48,18 @@
   font-weight:500;
   cursor:pointer;
 }
-.loginsignup-login{
+.signup-signup{
   margin-top:20px;
   color:#5c5c5c;
   font-size: 18px;
   font-weight: 500;
 }
 
-.loginsignup-login span{
+.signup-signup span{
     color:#ff4141;
     font-weight:600;
 }
-.loginsignup-agree{
+.signup-agree{
   display:flex;
   align-items:center;
   margin-top:25px;
@@ -68,6 +68,3 @@
   font-size:18px;
   font-weight:500;
 }
-
-
-

@@ -1,20 +1,20 @@
 import React from 'react'
-import './CSS/LoginSignup.css';
+import './CSS/Signup.css';
 
-const LoginSignup = () => {
+const Signup = () => {
   return (
-    <div className='loginsignup'>
-       <div className="loginsignup-container">
-          <h1>Sign Up</h1>
-          <div className="loginsignup-fields">
+    <div className='signup'>
+       <div className="signup-container">
+          <h1>SignUp</h1>
+          <div className="signup-fields">
             <intput type="text" placeholder='Your Name'/>
             <input type="email" placeholder='Email Address'/>
             <input type="password" placeholder='Password'/>
 
           </div>
           <button>Continue</button>
-          <p className='loginsignup-login'>Already have an account?<span>Login Here</span></p>
-          <div className='loginsignup-agree'>
+          <p className='signup-signup'>Already have an account?<span>signup Here</span></p>
+          <div className='signup-agree'>
               <input type="checkbox" name='' id=''/>
               <p>By continueing,I agree to the terms of use & privacy policy</p>
           </div>
@@ -25,4 +25,4 @@ const LoginSignup = () => {
   )
 }
 
-export default LoginSignup
+export default Signup
