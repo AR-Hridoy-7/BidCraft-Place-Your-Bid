@@ -1,15 +1,10 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 import models
-import utils
 from database import engine, get_db
 from routers import user,item,category,auth,qa,user_rating,bid
-import config
 
-models.Base.metadata.create_all(engine)
 app = FastAPI()
-
-manager = utils.connectionManager()
 
 # Define allowed origins
 origins = [
@@ -26,6 +21,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+models.Base.metadata.create_all(engine)
+
 app.include_router(user.router)
 app.include_router(item.router)
 app.include_router(category.router)
@@ -33,3 +30,4 @@ app.include_router(auth.router)
 app.include_router(qa.router)
 app.include_router(user_rating.router)
 app.include_router(bid.router)
+
