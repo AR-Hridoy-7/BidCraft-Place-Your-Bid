@@ -30,8 +30,5 @@ app.include_router(auth.router)
 app.include_router(qa.router)
 app.include_router(user_rating.router)
 app.include_router(bid.router)
-<<<<<<< HEAD:backend/main.py
 app.include_router(save.router)
-=======
 
->>>>>>> 4c566563d54eda6f76c4c95061d97349bddd0427:Back-end/main.py
