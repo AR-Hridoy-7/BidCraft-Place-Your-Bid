@@ -208,12 +208,25 @@ class MyDetails(UserDetails):
 class Bid(BaseModel):
     item_id : int
     bid_amount : float
-
     class Config:
         orm_mode : True
 
 class getBid(Bid):
     bid_id : int
-    bid_ammount : float
     bid_time : str
     user : UserBase
+    class Config:
+        orm_mode : True
+
+class getMyBid(Bid):
+    bid_id : int
+    bid_time : str
+    item : ItemBase
+
+    class Config:
+        orm_mode : True
+
+class getSaveItem(BaseModel):
+    items : List[showInmain] = []
+    class Config:
+        orm_mode = True
