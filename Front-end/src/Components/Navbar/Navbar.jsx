@@ -100,7 +100,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           <button onClick={handleLogout}>Logout</button>
         ) : (
           <Link to="/login">
-            <button>Login</button>
+            <button>Login / Signup</button>
           </Link>
         )}
         <Link to="/cart">

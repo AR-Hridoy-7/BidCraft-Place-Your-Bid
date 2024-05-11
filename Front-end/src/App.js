@@ -14,6 +14,8 @@ import CreateBid from './Pages/CreateBid';
 import Demo from './Components/SearchCategory/Demo'; // Importing the Demo component
 import Signup from './Pages/Signup';
 import MyProfile from './Pages/MyProfile';
+import ForgetPassword from './Pages/ForgetPassword';
+import ChangePassword from './Pages/ChangePassword';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Initialize isLoggedIn state
@@ -45,6 +47,8 @@ function App() {
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/createbid' element={<CreateBid/>}/>
           <Route path='/myprofile' element={<MyProfile/>}/>
+          <Route path='/forgetpassword' element={<ForgetPassword/>}/>
+          <Route path='/changepassword' element={<ChangePassword/>}/>
           {/* Updated route for Demo component with parameter placeholder */}
           <Route path='/demo/:parameter' element={<Demo/>}/>
         </Routes>

@@ -30,7 +30,7 @@ const Login = ({ setIsLoggedIn }) => { // Pass setIsLoggedIn as a prop
         console.log('Login successful:', response.data);
         // Navigate to home page ('/')
         navigate('/');
-        
+
       } else {
         console.error('Login failed: Response data is undefined');
       }
@@ -65,6 +65,9 @@ const Login = ({ setIsLoggedIn }) => { // Pass setIsLoggedIn as a prop
               onChange={handleChange}
               required
             />
+          </div>
+          <div className="forgot-password">
+            Forgot Password? <Link to="/forgetpassword"><span>Click Here</span></Link>
           </div>
           <button type="submit">Login</button>
         </form>
