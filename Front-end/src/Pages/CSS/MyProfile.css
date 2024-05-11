@@ -1,0 +1,39 @@
+.my-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info p {
+  margin-bottom: 10px;
+}
+
+.profile-items {
+  flex: 1;
+}
+
+.item-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.item-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}

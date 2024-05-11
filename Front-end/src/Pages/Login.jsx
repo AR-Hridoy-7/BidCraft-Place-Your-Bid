@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './CSS/Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
     user_id: '',
     password: '',
   });
+
+  const navigate = useNavigate(); // To use for programmatic navigation
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,26 +25,23 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:8000/signin', formData);
       
-      // Log the entire response object for debugging
-      console.log('Response:', response);
-  
-      if (response && response.data) {
-        console.log('Login successful:', response.data);
-        // Handle successful login, e.g., save token to state or localStorage
+      if (response && response.data && response.data.accessToken) {
+        const { accessToken } = response.data;
+        localStorage.setItem('accessToken', accessToken); // Store token in localStorage
+
+        // Redirect to home page after successful login
+        navigate('/'); // Redirect to the home page
       } else {
-        console.error('Login failed: Response data is undefined');
+        console.error('Login failed: Response data is invalid');
       }
     } catch (error) {
-      // Log the error and handle accordingly
       console.error('Login failed:', error);
   
-      // Check if response is available in error object
       if (error.response) {
         console.error('Error response:', error.response.data);
       }
     }
   };
-  
 
   return (
     <div className="login">
@@ -70,8 +69,8 @@ const Login = () => {
           <button type="submit">Login</button>
         </form>
         <div className="login-login">
-        Don't have an account? <Link to="/signup"><span>Sign Up</span></Link>
-      </div>
+          Don't have an account? <Link to="/signup"><span>Sign Up</span></Link>
+        </div>
       </div>
     </div>
   );

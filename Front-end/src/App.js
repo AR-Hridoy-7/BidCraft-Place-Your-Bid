@@ -13,6 +13,7 @@ import kid_banner from './Components/Assets/banner_kids.png';
 import CreateBid from './Pages/CreateBid';
 import Demo from './Components/SearchCategory/Demo'; // Importing the Demo component
 import Signup from './Pages/Signup';
+import MyProfile from './Pages/MyProfile';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/createbid' element={<CreateBid/>}/>
+          <Route path='/myprofile' element={<MyProfile/>}/>
           {/* Updated route for Demo component with parameter placeholder */}
           <Route path='/demo/:parameter' element={<Demo/>}/>
         </Routes>
