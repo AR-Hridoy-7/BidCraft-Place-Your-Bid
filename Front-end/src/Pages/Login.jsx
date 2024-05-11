@@ -19,14 +19,30 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post('http://localhost:8000/signin', formData);
-      console.log(response.data); // Handle success response, e.g., save token to state or localStorage
+      
+      // Log the entire response object for debugging
+      console.log('Response:', response);
+  
+      if (response && response.data) {
+        console.log('Login successful:', response.data);
+        // Handle successful login, e.g., save token to state or localStorage
+      } else {
+        console.error('Login failed: Response data is undefined');
+      }
     } catch (error) {
-      console.error('Login failed:', error.response.data.detail);
+      // Log the error and handle accordingly
+      console.error('Login failed:', error);
+  
+      // Check if response is available in error object
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+      }
     }
   };
+  
 
   return (
     <div className="login">
