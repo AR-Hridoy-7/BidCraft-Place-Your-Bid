@@ -41,20 +41,20 @@ const MyProfile = () => {
       </div>
       <div className="profile-details">
         <div className="profile-info">
-          <p>Name: {userData.name}</p>
-          <p>Email: {userData.email}</p>
-          <p>Phone: {userData.phone}</p>
-          <p>Overall Rating: {userData.overall_rating}</p>
+          <p><strong>Name:</strong> {userData.name}</p>
+          <p><strong>Email:</strong> {userData.email}</p>
+          <p><strong>Phone:</strong> {userData.phone}</p>
+          <p><strong>Overall Rating:</strong> {userData.overall_rating}</p>
         </div>
         <div className="profile-items">
           <h3>My Items:</h3>
           {userData.items.map((item) => (
             <div key={item.id} className="item-card">
               <img src={`data:image/jpeg;base64,${item.pic}`} alt={item.name} />
-              <p>Name: {item.name}</p>
-              <p>Category: {item.category}</p>
-              <p>Start Date: {item.auction_start_date}</p>
-              <p>End Date: {item.auction_end_date}</p>
+              <p><strong>Name:</strong> {item.name}</p>
+              <p><strong>Category:</strong> {item.category}</p>
+              <p><strong>Start Date:</strong> {item.auction_start_date}</p>
+              <p><strong>End Date:</strong> {item.auction_end_date}</p>
               {/* Add more item details here */}
             </div>
           ))}
