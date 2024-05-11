@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './CSS/Login.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => { // Pass setIsLoggedIn as a prop
   const [formData, setFormData] = useState({
     user_id: '',
     password: '',
   });
 
-  const navigate = useNavigate(); // To use for programmatic navigation
+  const navigate = useNavigate(); // Initialize navigate hook
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,22 +21,22 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post('http://localhost:8000/signin', formData);
-      
       if (response && response.data && response.data.accessToken) {
-        const { accessToken } = response.data;
-        localStorage.setItem('accessToken', accessToken); // Store token in localStorage
-
-        // Redirect to home page after successful login
-        navigate('/'); // Redirect to the home page
+        localStorage.setItem('accessToken', response.data.accessToken); // Store token in localStorage
+        setIsLoggedIn(true); // Set isLoggedIn state to true
+        console.log('Login successful:', response.data);
+        // Navigate to home page ('/')
+        navigate('/');
+        
       } else {
-        console.error('Login failed: Response data is invalid');
+        console.error('Login failed: Response data is undefined');
       }
     } catch (error) {
       console.error('Login failed:', error);
-  
+
       if (error.response) {
         console.error('Error response:', error.response.data);
       }

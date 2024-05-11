@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import Shop from './Pages/Shop';
@@ -16,10 +16,21 @@ import Signup from './Pages/Signup';
 import MyProfile from './Pages/MyProfile';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Initialize isLoggedIn state
+
+  useEffect(() => {
+    // Check for token in local storage on app load
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+        {/* Pass setIsLoggedIn as prop to Navbar */}
+        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path='/' element={<Shop/>}/>
           <Route path='/mens' element={<ShopCategory banner={men_banner} category="men"/>}/>
@@ -29,7 +40,8 @@ function App() {
             <Route path=':productId' element={<Product/>} />
           </Route>
           <Route path='/cart' element={<Cart/>}/>
-          <Route path='/login' element={<Login/>}/>
+          {/* Pass setIsLoggedIn as prop to Login */}
+          <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/createbid' element={<CreateBid/>}/>
           <Route path='/myprofile' element={<MyProfile/>}/>
