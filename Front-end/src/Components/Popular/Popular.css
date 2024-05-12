@@ -5,6 +5,7 @@
   gap: 10px;
   height: 90vh;
 }
+
 .popular h1{
   color: #171717;
   font-size: 50px;
@@ -19,9 +20,5 @@
 .popular-item{
   margin-top: 50px;
   display: flex;
-<<<<<<< HEAD
-
-=======
->>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
   gap: 30px;
 }

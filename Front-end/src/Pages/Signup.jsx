@@ -23,11 +23,7 @@ const Signup = () => {
     e.preventDefault();
   
     try {
-<<<<<<< HEAD
-      const response = await axios.post('http://127.0.0.1:8000/signup', formData);
-=======
       const response = await axios.post('http://localhost:8000/signup', formData);
->>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
       console.log('Response:', response); // Log the entire response object
       console.log('Response data:', response.data); // Log response data if available
     } catch (error) {

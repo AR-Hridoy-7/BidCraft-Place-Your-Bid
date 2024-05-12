@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-import React, { useContext, useState } from "react";
-import './Navbar.css';
-import logo from '../Assets/logo.png';
-import cart_icon from '../Assets/cart_icon.png';
-import { Link } from "react-router-dom";
-import { ShopContext } from "../../Context/ShopContext";
-
-
-const Navbar = () => {
-  const [menu, setMenu] = useState("shop");
-  const [searchValue, setSearchValue] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const { getTotalCartItems } = useContext(ShopContext);
-
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Construct the parameter value based on input text and selected category
-    const parameterValue = searchValue.trim() !== "" ? searchValue : selectedCategory;
-    // Navigate to the demo route with the parameter value using Link
-    // Note: Make sure to use backticks for string interpolation
-    window.location.href = `/demo/${parameterValue}`;
-  }
-=======
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
@@ -73,7 +48,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
->>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
 
   return (
     <div className="navbar">
@@ -88,14 +62,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
-<<<<<<< HEAD
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-=======
         <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
->>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
           <option value="all">All</option>
           <option value="men">Men</option>
           <option value="women">Women</option>
@@ -104,17 +71,11 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         <button type="submit">Search</button>
       </form>
       <ul className="nav-menu">
-<<<<<<< HEAD
-        <li onClick={() => { setMenu("shop") }}>
-          <Link style={{ textDecoration: 'none' }} to='/'>Shop</Link>
-          {menu === "shop" ? <hr /> : <></>}
-=======
         <li onClick={() => setMenu('shop')}>
           <Link style={{ textDecoration: 'none' }} to="/">
             Shop
           </Link>
           {menu === 'shop' ? <hr /> : <></>}
->>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
         </li>
         <li onClick={() => { setMenu("mens") }}>
           <Link style={{ textDecoration: 'none' }} to='/mens'>Vehicle</Link>
@@ -131,17 +92,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
       </ul>
       <div className="nav-login-cart">
         <div className="nav-create-bid">
-<<<<<<< HEAD
-          <Link to='/createbid'><button>Create bid</button></Link>
-        </div>
-        <Link to='/login'><button>Login</button></Link>
-        <Link to='/cart'><img src={cart_icon} alt="" /></Link>
-        <div className="nav-cart-count">{getTotalCartItems()}</div>
-      </div>
-    </div>
-  )
-}
-=======
           <Link to="/createbid">
             <button>Create bid</button>
           </Link>
@@ -161,6 +111,5 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     </div>
   );
 };
->>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
 
 export default Navbar;
