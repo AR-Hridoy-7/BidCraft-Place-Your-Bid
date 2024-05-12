@@ -6,6 +6,7 @@ import { ShopContext } from '../../Context/ShopContext';
 
 const BidDisplay = ({ product }) => {
   const { addToCart } = useContext(ShopContext);
+<<<<<<< HEAD
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining(product.auction_end_date));
 
   useEffect(() => {
@@ -15,6 +16,17 @@ const BidDisplay = ({ product }) => {
 
     return () => clearInterval(timer);
   }, [product.auction_end_date]);
+=======
+  const [timeLeft, setTimeLeft] = useState(getTimeRemaining(product.AuctionEndDate));
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(getTimeRemaining(product.AuctionEndDate));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [product.AuctionEndDate]);
+>>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
 
   function getTimeRemaining(endTime) {
     const total = Date.parse(endTime) - Date.parse(new Date());
@@ -35,7 +47,11 @@ const BidDisplay = ({ product }) => {
   return (
     <div className="biddisplay-container">
       <div className="biddisplay-image">
+<<<<<<< HEAD
         <img src={product.pic} alt={product.name} />
+=======
+        <img src={product.image} alt={product.name} />
+>>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
       </div>
       <div className="biddisplay-details">
         <h3>{product.name}</h3>
@@ -43,13 +59,21 @@ const BidDisplay = ({ product }) => {
         <p>Stock Type: Single</p>
         <p>Available Quantity: 1 Piece</p>
         <div className="bidding-details">
+<<<<<<< HEAD
           <p>Starting Bid: ${product.starting_price} (Reserve Price: ${product.current_bid})</p>
+=======
+          <p>Starting Bid: ${product.old_price} (Reserve Price: ${product.new_price})</p>
+>>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
           <p>Time Left: {timeLeft.days} days {timeLeft.hours} hours {timeLeft.minutes} minutes {timeLeft.seconds} seconds</p>
           <p>Active Bidders: 0 Total Bid: $0</p>
           <div className="bid-section">
             <p>Enter your available bid (it's free)</p>
             <input type="text" placeholder="Bid Amount" />
+<<<<<<< HEAD
             <button onClick={() => addToCart(product.item_id)}>Place Bid</button>
+=======
+            <button onClick={() => addToCart(product.id)}>Place Bid</button>
+>>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
             <p>Or</p>
             <button>Place an automatic bid</button>
           </div>

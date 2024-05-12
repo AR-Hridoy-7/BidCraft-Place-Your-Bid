@@ -10,6 +10,7 @@ import ProductDisplay from '../Components/ProductDisplay/ProductDisplay';
 
 
 const Product = () => {
+<<<<<<< HEAD
   const { all_product } = useContext(ShopContext);
 const { productId } = useParams();
 console.log("Product ID:", productId);
@@ -27,6 +28,19 @@ const product = all_product.find((e) => e.item_id === Number(productId));
         <RelatedProducts/>
       <h1>product is is {productId}</h1>
 
+=======
+  const {all_product}=useContext(ShopContext);
+  const {productId}=useParams();
+  const product=all_product.find((e)=> e.id===Number(productId));
+
+  return (
+    <div>
+        <Breadcrum product={product} />
+        {/* <BidDisplay product={product} /> */}
+        <BidDisplay product={product} />
+        <DescriptionBox/>
+        <RelatedProducts/>
+>>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
     </div>
   )
 }

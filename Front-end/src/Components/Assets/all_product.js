@@ -37,6 +37,7 @@ import p36_img from "./product_36.png";
 
 let all_product = [
   {
+<<<<<<< HEAD
     
     
     name: "Heater",
@@ -53,6 +54,18 @@ let all_product = [
       "phone": "01643978063"
     }
 
+=======
+    id: 1,
+    name: "Striped Flutter Sleeve Overlap Collar Peplum Hemlouse",
+    category: "women",
+    image: p1_img,
+    new_price: 700.0,
+    old_price: 80.5,
+    AuctionEndDate: "2024-12-12T12:30:00",
+    seller_id:400,bid:5,
+    
+    
+>>>>>>> df301b6ebce1d287843a987bb82c9cb5efecb687
   },
   {
     id: 2,
