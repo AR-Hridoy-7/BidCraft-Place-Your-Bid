@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Popular.css';
 import Item from '../Item/Item';
-
+import a_logo from '../Assets/1.jpg'
+import cart_icon from '../Assets/cart_icon.png';
+import no_img from '../Assets/no_img2.png';
 const Popular = () => {
   const [items, setItems] = useState([]);
 
@@ -19,15 +21,21 @@ const Popular = () => {
       <div className="popular-item">
         {items.map((item) => (
           <div key={item.item_id} className="item-container">
-            <img   src={`data:image/jpeg;base64,${item.pic}`} alt={item.name} />
+            
+                  
+            
+           
             <Item
               name={item.name}
               item_id={item.item_id}
+              pic={item.pic ? `data:image/jpeg;base64,${item.pic}` : no_img}
+
+            //  pic={cart_icon}
               starting_price={item.starting_price}
               current_bid={item.current_bid}
               auction_end_date={item.auction_end_date}
               description={item.description}
-              seller={item.seller}
+              //seller={item.seller}
             />
           </div>
         ))}
