@@ -2,10 +2,20 @@ import React, { useState, useEffect, useContext } from 'react';
 import './Item.css';
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
+import cart_icon from '../Assets/cart_icon.png';
+import no_img from '../Assets/no_image.png';
 
 const Item = ({ name, description, condition, starting_price, auction_end_date, pic, item_id, current_bid, seller }) => {
   const { addToCart } = useContext(ShopContext);
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining(new Date(auction_end_date)));
+  const [bidCount, setBidCount] = useState(0);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/bid/get_bid?id=${item_id}`)
+      .then(response => response.json())
+      .then(data => setBidCount(data.length))
+      .catch(error => console.error('Error fetching bid count:', error));
+  }, [item_id]);
 
   useEffect(() => {
     if (auction_end_date) {
@@ -47,9 +57,12 @@ const Item = ({ name, description, condition, starting_price, auction_end_date, 
   return (
     <div className='item'>
       <Link to={`/product/${item_id}`}>
-        <img onClick={() => window.scrollTo(0, 0)} src={pic} alt="" />
-      </Link> 
+        <img src={pic || no_img} alt="" />
+      </Link>
       <p>{name}</p>
+      <div className="item-bid">
+        <p>Bids: {bidCount}</p>
+      </div>
       <div className="item-prices">
         <div className="item-price-new">
           ${starting_price}
@@ -59,9 +72,6 @@ const Item = ({ name, description, condition, starting_price, auction_end_date, 
         </div>
         <div className="item-Auction-End-Date">
           {renderCountdown()}
-        </div>
-        <div className="item-bid">
-          <p>Bid: {current_bid}</p>
         </div>
       </div>
       {seller && (

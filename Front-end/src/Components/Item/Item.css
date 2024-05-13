@@ -1,10 +1,21 @@
 .item{
   width: 350px;
   cursor: pointer;
+ 
 }
+.item img{
+  height:40%;
+  width: 65%;
+}
+
 .item p{
-  margin: 6px 0px;
+  margin: 00px 0px;
 }
+
+
+
+
+
 .item-prices{
   display: flex;
   align-items: center;
