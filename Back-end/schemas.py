@@ -48,10 +48,6 @@ class itemShow(ItemBase):
     class Config:
         orm_mode = True
         
-class ShowCategory(Category):
-    items : List[itemShow] = []
-    class Config:
-        orm_mode : True
 
 class Item(ItemBase):
     pic : str
@@ -65,6 +61,12 @@ class showInmain(ItemBase):
     current_bid : float
     seller : UserBase
 
+    class Config:
+        orm_mode : True
+
+class ShowCategory(Category):
+    id : int
+    items : List[showInmain] = []
     class Config:
         orm_mode : True
 
