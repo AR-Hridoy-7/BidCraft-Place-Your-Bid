@@ -1,20 +1,47 @@
-import React from 'react'
-import './Popular.css'
-import data_product from '../Assets/data'
-import Item from '../Item/Item'
-
+import React, { useState, useEffect } from 'react';
+import './Popular.css';
+import Item from '../Item/Item';
+import a_logo from '../Assets/1.jpg'
+import cart_icon from '../Assets/cart_icon.png';
+import no_img from '../Assets/no_img2.png';
 const Popular = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/item/get_items')
+      .then(response => response.json())
+      .then(data => setItems(data))
+      .catch(error => console.error('Error fetching items:', error));
+  }, []);
+
   return (
     <div className='popular'>
       <h1>POPULAR IN WOMEN</h1>
       <hr />
       <div className="popular-item">
-        {data_product.map((item,i)=>{
-          return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} AuctionEndDate={item.AuctionEndDate} />
-        })}
+        {items.map((item) => (
+          <div key={item.item_id} className="item-container">
+            
+                  
+            
+           
+            <Item
+              name={item.name}
+              item_id={item.item_id}
+              pic={item.pic ? `data:image/jpeg;base64,${item.pic}` : no_img}
+
+            //  pic={cart_icon}
+              starting_price={item.starting_price}
+              current_bid={item.current_bid}
+              auction_end_date={item.auction_end_date}
+              description={item.description}
+              //seller={item.seller}
+            />
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Popular
+export default Popular;

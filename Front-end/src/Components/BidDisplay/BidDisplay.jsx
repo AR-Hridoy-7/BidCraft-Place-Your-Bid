@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './BidDisplay.css';
-import star_icon from '../Assets/star_icon.png';
-import star_dull_icon from '../Assets/star_dull_icon.png';
 import { ShopContext } from '../../Context/ShopContext';
+import no_img from '../Assets/no_img2.png';
 
 const BidDisplay = ({ product }) => {
   const { addToCart } = useContext(ShopContext);
-  const [timeLeft, setTimeLeft] = useState(getTimeRemaining(product.AuctionEndDate));
+  const [timeLeft, setTimeLeft] = useState(getTimeRemaining(product.auction_end_date));
+  const [showBidHistory, setShowBidHistory] = useState(false);
+  const [bidHistory, setBidHistory] = useState([]);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(getTimeRemaining(product.AuctionEndDate));
+      setTimeLeft(getTimeRemaining(product.auction_end_date));
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [product.AuctionEndDate]);
+  }, [product.auction_end_date]);
 
   function getTimeRemaining(endTime) {
     const total = Date.parse(endTime) - Date.parse(new Date());
@@ -32,28 +33,70 @@ const BidDisplay = ({ product }) => {
     };
   }
 
+  // Function to toggle bid history visibility
+  const toggleBidHistory = () => {
+    setShowBidHistory(!showBidHistory);
+    if (!showBidHistory) {
+      fetchBidHistory();
+    }
+  };
+
+  // Function to fetch bid history
+  const fetchBidHistory = () => {
+    // Make API call to fetch bid history
+    fetch(`http://127.0.0.1:8000/bid/get_bid?id=${product.item_id}`)
+      .then(response => response.json())
+      .then(data => setBidHistory(data))
+      .catch(error => console.error('Error fetching bid history:', error));
+  };
+
   return (
     <div className="biddisplay-container">
       <div className="biddisplay-image">
-        <img src={product.image} alt={product.name} />
+        <img src={product.pic ? `data:image/jpeg;base64,${product.pic}` : no_img} alt="" />
       </div>
       <div className="biddisplay-details">
         <h3>{product.name}</h3>
-        <p>Condition: Used</p>
+        <p>Condition: {product.condition}</p>
         <p>Stock Type: Single</p>
-        <p>Available Quantity: 1 Piece</p>
         <div className="bidding-details">
-          <p>Starting Bid: ${product.old_price} (Reserve Price: ${product.new_price})</p>
-          <p>Time Left: {timeLeft.days} days {timeLeft.hours} hours {timeLeft.minutes} minutes {timeLeft.seconds} seconds</p>
-          <p>Active Bidders: 0 Total Bid: $0</p>
+          <p>Starting Bid: ${product.starting_price} (Reserve Price: ${product.current_bid})</p>
+          {timeLeft.total <= 0 ? (
+            <p>Ended</p>
+          ) : (
+            <p>Time Left: {timeLeft.days} days {timeLeft.hours} hours {timeLeft.minutes} minutes {timeLeft.seconds} seconds</p>
+          )}
           <div className="bid-section">
             <p>Enter your available bid (it's free)</p>
             <input type="text" placeholder="Bid Amount" />
-            <button onClick={() => addToCart(product.id)}>Place Bid</button>
-            <p>Or</p>
-            <button>Place an automatic bid</button>
+            <button onClick={() => addToCart(product.item_id)}>Place Bid</button>
+            
           </div>
-          <p>Buy Now Price: $6200,000</p>
+         
+          <button onClick={toggleBidHistory}>Show Bid History</button>
+          {showBidHistory && (
+            <div className="bid-history">
+              <h4>Bid History:</h4>
+              <table>
+                <thead>
+                  <tr>
+                    <th>User Name</th>
+                    <th>Bid Amount</th>
+                    <th>Bid Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bidHistory.map((bid, index) => (
+                    <tr key={index}>
+                      <td>{bid.user.name}</td>
+                      <td>${bid.bid_amount}</td>
+                      <td>{bid.bid_time}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
     </div>

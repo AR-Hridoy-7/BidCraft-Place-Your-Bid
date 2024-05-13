@@ -2,20 +2,30 @@ import React, { useState, useEffect, useContext } from 'react';
 import './Item.css';
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
+import cart_icon from '../Assets/cart_icon.png';
+import no_img from '../Assets/no_image.png';
 
-const Item = ({ id, name, image, new_price, old_price, AuctionEndDate,bid }) => {
+const Item = ({ name, description, condition, starting_price, auction_end_date, pic, item_id, current_bid, seller }) => {
   const { addToCart } = useContext(ShopContext);
-  const [timeLeft, setTimeLeft] = useState(getTimeRemaining(new Date(AuctionEndDate)));
+  const [timeLeft, setTimeLeft] = useState(getTimeRemaining(new Date(auction_end_date)));
+  const [bidCount, setBidCount] = useState(0);
 
   useEffect(() => {
-    if (AuctionEndDate) {
+    fetch(`http://127.0.0.1:8000/bid/get_bid?id=${item_id}`)
+      .then(response => response.json())
+      .then(data => setBidCount(data.length))
+      .catch(error => console.error('Error fetching bid count:', error));
+  }, [item_id]);
+
+  useEffect(() => {
+    if (auction_end_date) {
       const timer = setInterval(() => {
-        setTimeLeft(getTimeRemaining(new Date(AuctionEndDate)));
+        setTimeLeft(getTimeRemaining(new Date(auction_end_date)));
       }, 1000);
 
       return () => clearInterval(timer);
     }
-  }, [AuctionEndDate]);
+  }, [auction_end_date]);
 
   function getTimeRemaining(endTime) {
     const total = endTime - new Date();
@@ -37,7 +47,6 @@ const Item = ({ id, name, image, new_price, old_price, AuctionEndDate,bid }) => 
     if (timeLeft.total > 0) {
       const { days, hours, minutes, seconds } = timeLeft;
       return (
-        // <p>Time Left: {days} days {hours} hours {minutes} minutes {seconds} seconds</p>
         <p>Running</p>
       );
     } else {
@@ -47,24 +56,31 @@ const Item = ({ id, name, image, new_price, old_price, AuctionEndDate,bid }) => 
 
   return (
     <div className='item'>
-      <Link to={`/product/${id}`}>
-        <img onClick={() => window.scrollTo(0, 0)} src={image} alt="" />
-      </Link> 
+      <Link to={`/product/${item_id}`}>
+        <img src={pic || no_img} alt="" />
+      </Link>
       <p>{name}</p>
+      <div className="item-bid">
+        <p>Bids: {bidCount}</p>
+      </div>
       <div className="item-prices">
         <div className="item-price-new">
-          ${new_price}
+          ${starting_price}
         </div> 
         <div className="item-price-old">
-          ${old_price}
+          ${current_bid}
         </div>
         <div className="item-Auction-End-Date">
           {renderCountdown()}
         </div>
-        <div className="item-bid">
-          <p>Bid:{bid}</p>
-        </div>
       </div>
+      {seller && (
+        <div className="seller-info">
+          <p>Seller: {seller.name}</p>
+          <p>Email: {seller.email}</p>
+          <p>Phone: {seller.phone}</p>
+        </div>
+      )}
     </div>
   );
 };

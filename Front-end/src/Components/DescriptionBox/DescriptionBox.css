@@ -29,3 +29,58 @@
     padding: 48px;
     padding-bottom: 70px;
 }
+
+
+.description-item{
+    display: flex;
+    flex-direction: column;
+}
+
+.question-answer {
+    
+    display: flex;
+    flex-direction: column; /* Change to column */
+    gap: 1px; /* Adjust as needed */
+    margin-bottom: 30px;
+}
+
+.question-side {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.question-side img {
+    max-width: 50px;
+    height: auto;
+    background-color: rgba(242, 117, 117, 0.553);
+    
+}
+
+.question {
+    margin: 0;
+    flex: 1; /* Take remaining space */
+    background-color: rgba(242, 117, 117, 0.553);
+}
+
+.answer-side {
+    margin-left: 70px; /* Adjust as needed */
+    background-color: rgba(173, 242, 117, 0.553);
+}
+
+.answer-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.answer-logo {
+    max-width: 50px;
+    height: auto;
+    background-color: rgba(173, 242, 117, 0.553);
+}
+
+.answer {
+    margin: 0;
+}
+

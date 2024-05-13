@@ -37,16 +37,22 @@ import p36_img from "./product_36.png";
 
 let all_product = [
   {
-    id: 1,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hemlouse",
-    category: "women",
-    image: p1_img,
-    new_price: 700.0,
-    old_price: 80.5,
-    AuctionEndDate: "2024-12-12T12:30:00",
-    seller_id:400,bid:5,
     
     
+    name: "Heater",
+    description: "Valo product",
+    condition: "mint",
+    starting_price: 2500,
+    auction_end_date: "2024-07-01 00:00:00.000000",
+    pic: p1_img,
+    item_id: 3,
+    current_bid: 2500,
+    seller: {
+      "name": "Tahsin",
+      "email": "tahsin030602@gmail.com",
+      "phone": "01643978063"
+    }
+
   },
   {
     id: 2,
