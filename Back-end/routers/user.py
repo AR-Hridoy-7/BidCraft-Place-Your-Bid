@@ -17,6 +17,12 @@ router = APIRouter(
 
 @router.post('/create',status_code=status.HTTP_201_CREATED)
 def create_user(request : schemas.User,db: Session = Depends(database.get_db)):
+    user = db.query(models.User).filter(models.User.phone==request.phone).first()
+    if user:
+        raise HTTPException(status_code=status.HTTP_208_ALREADY_REPORTED,detail='You have a accout with this phone')
+    user = db.query(models.User).filter(models.User.email==request.email).first()
+    if user:
+        raise HTTPException(status_code=status.HTTP_208_ALREADY_REPORTED,detail='You have a accout with this email')
     new_user =  user.create_user(request,db)
     if not new_user:
         raise HTTPException(status_code=status.HTTP_204_NO_CONTENT,detail=f'User not created')
