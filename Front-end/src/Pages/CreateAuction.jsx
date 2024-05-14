@@ -43,6 +43,9 @@ const CreateAuction = () => {
     Object.keys(formData).forEach(key => {
       if (key === 'category') {
         formDataObj.append(key, JSON.stringify(formData[key].split(',')));
+      } else if (key === 'auction_end_date') {
+        const formattedDate = new Date(formData[key]).toISOString().replace('T', ' ').replace('Z', '');
+        formDataObj.append(key, formattedDate);
       } else {
         formDataObj.append(key, formData[key]);
       }
