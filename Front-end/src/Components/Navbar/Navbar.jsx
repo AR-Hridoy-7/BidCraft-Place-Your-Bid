@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../Assets/logo.png';
 import cart_icon from '../Assets/cart_icon.png';
+import my_profile from '../Assets/my_profile.jpg'
 import drop_icon from '../Assets/three_dott.png';
 import { ShopContext } from '../../Context/ShopContext';
 import axios from "axios";
@@ -27,6 +28,28 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   const handleInputChange = (e) => {
     setSearchValue(e.target.value); // Update the searchValue state as the user types
+  };
+
+  const handleMyProfile = async () => {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+    alert('Please log in to go to your profile.');
+    navigate('/login');
+    } 
+    else {
+    navigate('/myprofile');
+  }
+};
+
+  const handleCreateAuction = async () => {
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+      alert('Please log in to create an auction.');
+      navigate('/login');
+      } 
+      else {
+      navigate('/createauction');
+    }
   };
 
   const handleLogout = async () => {
@@ -129,9 +152,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
       <div className="nav-login-cart">
         <div className="nav-create-bid">
-          <Link to="/createauction">
-            <button>Create Auction</button>
-          </Link>
+            <button onClick={handleCreateAuction}>Create Auction</button>
         </div>
         {isLoggedIn ? (
           <button onClick={handleLogout}>Logout</button>
@@ -140,10 +161,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             <button>Login / Signup</button>
           </Link>
         )}
-        <Link to="/cart">
-          <img src={cart_icon} alt="" />
-        </Link>
-        <div className="nav-cart-count">{getTotalCartItems()}</div>
+        <img onClick={handleMyProfile} src={my_profile} alt="" />
       </div>
     </div>
   );

@@ -127,6 +127,11 @@
   background: white;
   cursor: pointer;
 }
+.nav-login-cart img{
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
 .nav-login-cart button:active{
   background: #f3f3f3;
 }

@@ -22,12 +22,12 @@ def create_bid(request: schemas.Bid, db: Session = Depends(database.get_db), cur
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
     elif item.seller_id == current_user.user_id:
          raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Not allowed")
-    elif request.current_bid <= (item.current_bid+1):
+    elif request.bid_amount <= (item.current_bid+1):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Enter a bid amount higher than {item.current_bid+1}")
     else:
         now = datetime.now()
         current_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
-        new_bid = models.Bid(item_id=request.item_id, user_id=current_user.user_id, bid_amount=request.current_bid, bid_time=current_datetime)
+        new_bid = models.Bid(item_id=request.item_id, user_id=current_user.user_id, bid_amount=request.bid_amount, bid_time=current_datetime)
         item.current_bid = request.bid_amount
         item.winner_id = current_user.user_id
         db.add(new_bid)
