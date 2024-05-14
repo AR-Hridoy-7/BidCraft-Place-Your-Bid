@@ -16,29 +16,24 @@ const Popular = () => {
 
   return (
     <div className='popular'>
-      <h1>POPULAR IN WOMEN</h1>
+      <h1>POPULAR IN RECENT TIME</h1>
       <hr />
       <div className="popular-item">
-        {items.map((item) => (
-          <div key={item.item_id} className="item-container">
-            
-                  
-            
-           
-            <Item
-              name={item.name}
-              item_id={item.item_id}
-              pic={item.pic ? `data:image/jpeg;base64,${item.pic}` : no_img}
-
-            //  pic={cart_icon}
-              starting_price={item.starting_price}
-              current_bid={item.current_bid}
-              auction_end_date={item.auction_end_date}
-              description={item.description}
-              //seller={item.seller}
-            />
-          </div>
-        ))}
+        {items
+          .filter(item => item.item_id % 2 === 0) // Filter even item_id
+          .map((item) => (
+            <div key={item.item_id} className="item-container">
+              <Item
+                name={item.name}
+                item_id={item.item_id}
+                pic={item.pic ? `data:image/jpeg;base64,${item.pic}` : no_img}
+                starting_price={item.starting_price}
+                current_bid={item.current_bid}
+                auction_end_date={item.auction_end_date}
+                description={item.description}
+              />
+            </div>
+          ))}
       </div>
     </div>
   );

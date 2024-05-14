@@ -17,7 +17,9 @@
 }
 
 .biddisplay-image:hover img {
-  transform: scale(1.1); /* Scale the image by 1.1 when hovering */
+  cursor: zoom-in; /* Change cursor to zoom-in when hovering over the image */
+  transform: scale(1.4); /* Scale the image by 1.6 when hovering */
+  transform-origin: calc((100% - 1px) * 100%) calc((100% - 1px) * 100%); /* Adjust the origin point */
   z-index: 1; /* Ensure the image is above other content */
 }
 
@@ -60,24 +62,36 @@
 .bidding-details p {
   margin-bottom: 5px;
 }
-
-.bid-section {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+.bid-section{
+  margin-bottom: 15px;
+  
+ 
 }
 
-.bid-section input {
-  padding: 10px;
-  margin-bottom: 10px;
+.bsi{
+  height: 40px;
+  width: 530px;
+  background-color: aquamarine;
+}
+.bsb{
+  height: 44px;
+  width: 130px;
+  background-color: brown;
+}
+.question-section{
+  margin-bottom: 15px;
 }
 
-.bid-section button {
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  cursor: pointer;
+.qsi{
+  height: 40px;
+  width: 530px;
+  background-color: chartreuse;
 }
-
+.qsb{
+  height: 44px;
+  width: 130px;
+  background-color: blue;
+}
 /* Styles for bid history box */
 .bid-history {
   margin-top: 20px;

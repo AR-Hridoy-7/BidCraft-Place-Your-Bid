@@ -36,9 +36,20 @@ function App() {
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path='/' element={<Shop/>}/>
-          <Route path='/mens' element={<ShopCategory banner={men_banner} category="men"/>}/>
-          <Route path='/womens' element={<ShopCategory banner={women_banner} category="women"/>}/>
-          <Route path='/kids' element={<ShopCategory banner={kid_banner} category="kid"/>}/>
+          <Route path='/Man' element={<ShopCategory banner={men_banner} category="Man"/>}/>
+          <Route path='/Women' element={<ShopCategory banner={women_banner} category="Women"/>}/>
+          <Route path='/Child' element={<ShopCategory banner={kid_banner} category="Child"/>}/>
+
+          <Route path='/Toys' element={<ShopCategory banner={men_banner} category="Toys"/>}/>
+          <Route path='/Software' element={<ShopCategory banner={women_banner} category="Software"/>}/>
+          <Route path='/Electronics' element={<ShopCategory banner={kid_banner} category="Electronics"/>}/>
+          <Route path='/Cosmetics' element={<ShopCategory banner={men_banner} category="Cosmetics"/>}/>
+          <Route path='/Computers' element={<ShopCategory banner={women_banner} category="Computers"/>}/>
+          <Route path='/Mobile' element={<ShopCategory banner={kid_banner} category="Mobile"/>}/>
+          <Route path='/Game' element={<ShopCategory banner={men_banner} category="Game"/>}/>
+          <Route path='/Sports and Outdoor' element={<ShopCategory banner={women_banner} category="Sports and Outdoor"/>}/>
+          
+
           <Route path='/product' element={<Product/>}>
             <Route path=':productId' element={<Product/>} />
           </Route>
@@ -52,7 +63,8 @@ function App() {
           <Route path='/changepassword' element={<ChangePassword/>}/>
           <Route path='/createauction' element={<CreateAuction/>}/>
           {/* Updated route for Demo component with parameter placeholder */}
-          <Route path='/demo/:parameter' element={<Demo/>}/>
+          <Route path="/demo/:searchQuery" element={<Demo />} />
+
         </Routes>
         <Footer/>
       </BrowserRouter>

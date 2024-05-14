@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../Assets/logo.png';
 import cart_icon from '../Assets/cart_icon.png';
+import drop_icon from '../Assets/three_dott.png';
 import { ShopContext } from '../../Context/ShopContext';
 import axios from "axios";
 
@@ -12,11 +13,20 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const { getTotalCartItems } = useContext(ShopContext);
   const navigate = useNavigate();
+  const [navOpen, setNavOpen] = useState(false); // State to manage navigation visibility
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const parameterValue = searchValue.trim() !== '' ? searchValue : selectedCategory;
-    window.location.href = `/demo/${parameterValue}`;
+  // Function to toggle the navigation bar
+  const toggleNav = () => {
+    setNavOpen(!navOpen);
+  };
+
+  // Function to close the navigation bar when a category link is clicked
+  const handleCategoryClick = () => {
+    setNavOpen(false);
+  };
+
+  const handleInputChange = (e) => {
+    setSearchValue(e.target.value); // Update the searchValue state as the user types
   };
 
   const handleLogout = async () => {
@@ -42,54 +52,81 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
       setIsLoggedIn(false); // Update the isLoggedIn state to false
       localStorage.removeItem('accessToken'); // Remove the access token from localStorage
       navigate('/');
-
     } catch (error) {
       console.error('Logout failed:', error);
     }
   };
 
-
   return (
     <div className="navbar">
-      <div className="nav-logo">
-        <img src={logo} alt="" />
-        <p>BidCraft</p>
+      <img className="three_dot" src={drop_icon} alt="" onClick={toggleNav} />
+      {/* Render the navigation bar conditionally with dynamic class */}
+      <div className={`sidenav ${navOpen ? 'open' : ''}`}>
+        <Link style={{ textDecoration: 'none' }} to='/Man'>
+          <p onClick={handleCategoryClick}>Man</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Women'>
+          <p onClick={handleCategoryClick}>Women</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Child'>
+          <p onClick={handleCategoryClick}>Child</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Toys'>
+          <p onClick={handleCategoryClick}>Toys</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Software'>
+          <p onClick={handleCategoryClick}>Software</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Electronics'>
+          <p onClick={handleCategoryClick}>Electronics</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Cosmetics'>
+          <p onClick={handleCategoryClick}>Cosmetics</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Computers'>
+          <p onClick={handleCategoryClick}>Computers</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Mobile'>
+          <p onClick={handleCategoryClick}>Mobile</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Game'>
+          <p onClick={handleCategoryClick}>Game</p>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to='/Sports and Outdoor'>
+          <p onClick={handleCategoryClick}>Sports and Outdoor</p>
+        </Link>
       </div>
-      <form onSubmit={handleSubmit} className="nav-search">
+
+        <Link style={{ textDecoration: 'none' }} to="/" onClick={() => setSearchValue('')}>
+            <div className="nav-logo">
+               <img src={logo} alt="" />
+               <p>BidCraft</p>
+            </div>
+        </Link>
+
+
+      <div className="nav-search">
         <input
           type="text"
-          placeholder="Search category..."
+          placeholder="Search an item..."
           value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={handleInputChange} // Call handleInputChange when the input value changes
         />
-        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-          <option value="all">All</option>
-          <option value="men">Men</option>
-          <option value="women">Women</option>
-          <option value="kid">Kids</option>
-        </select>
-        <button type="submit">Search</button>
-      </form>
-      <ul className="nav-menu">
+        {/* Use Link to navigate to the product page with the search query included */}
+        <Link to={`/demo/${searchValue}`}>
+          <button>Search</button>
+        </Link>
+      </div>
+
+      {/* <ul className="nav-menu">
         <li onClick={() => setMenu('shop')}>
           <Link style={{ textDecoration: 'none' }} to="/">
             Shop
           </Link>
           {menu === 'shop' ? <hr /> : <></>}
         </li>
-        <li onClick={() => { setMenu("mens") }}>
-          <Link style={{ textDecoration: 'none' }} to='/mens'>Vehicle</Link>
-          {menu === "mens" ? <hr /> : <></>}
-        </li>
-        <li onClick={() => { setMenu("womens") }}>
-          <Link style={{ textDecoration: 'none' }} to='/womens'>Electronics</Link>
-          {menu === "womens" ? <hr /> : <></>}
-        </li>
-        <li onClick={() => { setMenu("kids") }}>
-          <Link style={{ textDecoration: 'none' }} to='/kids'>Others</Link>
-          {menu === "kids" ? <hr /> : <></>}
-        </li>
-      </ul>
+      </ul> */}
+
       <div className="nav-login-cart">
         <div className="nav-create-bid">
           <Link to="/createauction">
