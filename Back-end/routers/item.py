@@ -8,11 +8,14 @@ from sqlalchemy import desc
 from respository import item
 from sqlalchemy.orm import Session
 import schemas,database,models,oauth2
+from fastapi.middleware.cors import CORSMiddleware
+
 
 router = APIRouter(
     prefix='/item',
     tags=['item']
 )
+
 
 def getans(id,db: Session):
     ans = db.query(models.Answer).filter(models.Answer.question_id==id).all()
