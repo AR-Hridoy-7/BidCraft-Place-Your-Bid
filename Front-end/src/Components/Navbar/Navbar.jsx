@@ -92,8 +92,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
       </ul>
       <div className="nav-login-cart">
         <div className="nav-create-bid">
-          <Link to="/createbid">
-            <button>Create bid</button>
+          <Link to="/createauction">
+            <button>Create Auction</button>
           </Link>
         </div>
         {isLoggedIn ? (
