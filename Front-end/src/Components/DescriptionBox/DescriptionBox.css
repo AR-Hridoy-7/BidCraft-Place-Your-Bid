@@ -15,8 +15,8 @@
     border:1px solid #d0d0d0;
 }
 .descriptionbox-nav-box.fade{
-    background: #FBFBFB;
-    color:#555;
+    background: #4aa6ed;
+    color:#af2e93;
 
 
 
@@ -56,16 +56,31 @@
     background-color: rgba(242, 117, 117, 0.553);
     
 }
+.answer-name{
+    color: red;
+}
+
+.qsic{
+    height: 30px;
+    width: 530px;
+    background-color: rgb(243, 240, 245);
+  }
+  .qsbc{
+    height: 34px;
+    width: 130px;
+    background-color: rgb(187, 10, 84);
+  }
+
 
 .question {
     margin: 0;
     flex: 1; /* Take remaining space */
-    background-color: rgba(242, 117, 117, 0.553);
+    background-color: rgba(151, 230, 248, 0.553);
 }
 
 .answer-side {
     margin-left: 70px; /* Adjust as needed */
-    background-color: rgba(173, 242, 117, 0.553);
+    /* background-color: rgba(173, 242, 117, 0.553); */
 }
 
 .answer-wrapper {
@@ -82,5 +97,39 @@
 
 .answer {
     margin: 0;
+    background-color: #dce2e7;
+}
+.answer-name-time{}
+
+.comment-section{
+    
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+}
+.comment-section p{
+   
+    display: inline;
+    ;
+    
+}
+.comment-p1{
+    height: 20px;
+    background-color: aquamarine;
+    
+}
+.comment-p2{
+    color: rgb(42, 19, 247);
+    margin-right: 15px;
 }
 
+.qsicm{
+    height: 30px;
+    width: 530px;
+    background-color: rgb(243, 240, 245);
+  }
+  .qsbcm{
+    height: 34px;
+    width: 130px;
+    background-color: rgb(86, 221, 140);
+  }

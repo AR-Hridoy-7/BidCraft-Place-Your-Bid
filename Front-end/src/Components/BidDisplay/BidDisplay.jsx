@@ -68,11 +68,16 @@ const BidDisplay = ({ product }) => {
           )}
           <div className="bid-section">
             <p>Enter your available bid (it's free)</p>
-            <input type="text" placeholder="Bid Amount" />
-            <button onClick={() => addToCart(product.item_id)}>Place Bid</button>
+            <input className="bsi"  type="text" placeholder="Bid Amount" />
+            <button className="bsb"  onClick={() => addToCart(product.item_id)}>Place Bid</button>
             
           </div>
-         
+          <div className="question-section">
+            
+            <input className="qsi" type="text" placeholder="place a question" />
+            <button className="qsb"  onClick={() => addToCart(product.item_id)}>Upload question</button>
+            
+          </div>
           <button onClick={toggleBidHistory}>Show Bid History</button>
           {showBidHistory && (
             <div className="bid-history">

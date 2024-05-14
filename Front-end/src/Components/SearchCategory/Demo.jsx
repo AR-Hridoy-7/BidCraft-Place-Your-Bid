@@ -1,76 +1,103 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import data_product from '../Assets/all_product';
 import Item from '../Item/Item';
 import './Demo.css';
 import dropdown_icon from '../Assets/dropdown_icon.png';
+import no_img from '../Assets/no_img2.png';
 
 const Demo = () => {
-  const { parameter } = useParams();
+  const { searchQuery } = useParams(); // Assuming you are passing the search query as a parameter
+  const [products, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState('');
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value);
-  };
-
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  
   useEffect(() => {
-    const filtered = data_product.filter(item => item.category === parameter);
-    setFilteredProducts(filtered);
-  }, [parameter]);
+    // Fetch items based on search query
+    fetch(`http://127.0.0.1:8000/item/search_items`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text: searchQuery }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((error) => console.error('Error fetching items:', error));
+  }, [searchQuery]);
 
-  const applySorting = (products) => {
-    switch (sortOption) {
-      case 'priceLowToHigh':
-        return products.slice().sort((a, b) => a.new_price - b.new_price);
-      case 'priceHighToLow':
-        return products.slice().sort((a, b) => b.new_price - a.new_price);
-      case 'nameAZ':
-        return products.slice().sort((a, b) => a.name.localeCompare(b.name));
-      case 'nameZA':
-        return products.slice().sort((a, b) => b.name.localeCompare(a.name));
+  const handleSortOptionChange = (option) => {
+    setSortOption(option);
+    setDropdownVisible(false);
+    // Implement sorting logic based on the selected option
+    // You can update the products state with sorted products
+    switch (option) {
+      case 'A to Z':
+        setProducts([...products].sort((a, b) => a.name.localeCompare(b.name)));
+        break;
+      case 'Z to A':
+        setProducts([...products].sort((a, b) => b.name.localeCompare(a.name)));
+        break;
+      case 'Price: Low to High':
+        setProducts([...products].sort((a, b) => a.starting_price - b.starting_price));
+        break;
+      case 'Price: High to Low':
+        setProducts([...products].sort((a, b) => b.starting_price - a.starting_price));
+        break;
       default:
-        return products;
+        break;
     }
   };
 
-  const sortedProducts = applySorting(filteredProducts);
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
 
   return (
-    <div className='demo'>
-      <p>{parameter}</p>
-      <p>amader sdedfdsjfldsk</p>
-      <div className="demo-indexSort">
+    <div className='shop-category'>
+     
+      <div className="shopcategory-indexSort">
         <p>
-          <span>Showing 1-12</span> out of 36 Products
+          <span>Showing 1-12</span> out of {products.length} Products  
         </p>
-        <div className="demo-sort">
-          <span>Sort by:</span>
-          <select value={sortOption} onChange={handleSortChange}>
-            <option value="">Select Option</option>
-            <option value="priceLowToHigh">Sort by Price (Low to High)</option>
-            <option value="priceHighToLow">Sort by Price (High to Low)</option>
-            <option value="nameAZ">Sort by Name (A-Z)</option>
-            <option value="nameZA">Sort by Name (Z-A)</option>
-          </select>
-          <img src={dropdown_icon} alt="" />
+        
+        <div className="shopcategory-sort">
+          <span className="sort-label" onClick={toggleDropdown}>
+            Sort by: {sortOption || 'Select'}
+            <img src={dropdown_icon} alt="" />
+          </span>
+          {dropdownVisible && (
+            <div className="dropdown-content">
+              <button onClick={() => handleSortOptionChange('A to Z')}>A to Z</button>
+              <button onClick={() => handleSortOptionChange('Z to A')}>Z to A</button>
+              <button onClick={() => handleSortOptionChange('Price: Low to High')}>Price: Low to High</button>
+              <button onClick={() => handleSortOptionChange('Price: High to Low')}>Price: High to Low</button>
+            </div>
+          )}
         </div>
+        <p>{searchQuery}</p>
       </div>
-      <div className="demo-item">
-        {sortedProducts.map((item, i) => (
-          <Item
-            key={i}
-            id={item.id}
-            name={item.name}
-            image={item.image}
-            new_price={item.new_price}
-            old_price={item.old_price}
-            AuctionEndDate={item.AuctionEndDate}
-          />
+      <div className="shopcategory-products">
+        {products.map((product, index) => (
+          <div key={index} className="product-name">
+            <Item
+              name={product.name}
+              item_id={product.item_id}
+              pic={product.pic ? `data:image/jpeg;base64,${product.pic}` : no_img}
+              starting_price={product.starting_price}
+              current_bid={product.current_bid}
+              auction_end_date={product.auction_end_date}
+              description={product.description}
+            />
+          </div>
         ))}
       </div>
+      {/* <div className="shopcategory-loadmore">
+        Explore more
+      </div> */}
     </div>
   );
-}
+};
 
 export default Demo;

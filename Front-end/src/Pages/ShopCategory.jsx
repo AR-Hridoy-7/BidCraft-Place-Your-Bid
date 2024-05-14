@@ -48,9 +48,18 @@ const ShopCategory = (props) => {
 
   const getCategoryVariable = (category) => {
     const categoryMap = {
-      'women': 'Electronics',
-      'kid': 'Electronics',
-      'men':'Cosmetics'
+      'Man': 'Man',
+      'Women': 'Women',
+      'Child':'Child',
+      'Toys': 'Toys',
+      'Software': 'Software',
+      'Electronics':'Electronics',
+      'Cosmetics': 'Cosmetics',
+      'Computers': 'Computers',
+      'Mobile':'Mobile',
+      'Game': 'Game',
+      'Sports and Outdoor': 'Sports and Outdoor',
+      
     };
     return categoryMap[category] || category;
   };
@@ -87,7 +96,7 @@ const ShopCategory = (props) => {
       <img className='shopcategory-banner' src={props.banner} alt="" />
       <div className="shopcategory-indexSort">
         <p>
-          <span>Showing 1-12</span> out of {itemIds.length} Products
+          <span>Showing </span>  {itemIds.length} Products
         </p>
         <div className="shopcategory-sort">
           <span className="sort-label" onClick={toggleDropdown}>
@@ -121,7 +130,7 @@ const ShopCategory = (props) => {
         ))}
       </div>
       <div className="shopcategory-loadmore">
-        Explore more
+          Explore more
       </div>
     </div>
   );
