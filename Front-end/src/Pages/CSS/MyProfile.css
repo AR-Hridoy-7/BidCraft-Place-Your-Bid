@@ -1,9 +1,11 @@
+/* MyProfile.css */
+
 .my-profile {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+  font-family: Arial, sans-serif;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #f4f4f9;
+  max-width: 800px;
+  margin: auto;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -11,74 +13,101 @@
 .profile-header {
   text-align: center;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .profile-header h2 {
   color: #333;
+  margin: 0;
+  font-size: 24px;
+}
+
+.change-password-link {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #007BFF;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.change-password-link:hover {
+  background-color: #0056b3;
 }
 
 .profile-details {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .profile-info {
   background-color: #fff;
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .profile-info p {
-  font-size: 16px;
-  margin-bottom: 10px;
+  margin: 10px 0;
+  color: #555;
+}
+
+.profile-info p strong {
+  color: #333;
 }
 
 .profile-items {
   background-color: #fff;
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .profile-items h3 {
+  margin-top: 0;
   color: #333;
-  margin-bottom: 15px;
 }
 
 .item-card {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #ddd;
-  padding: 15px 0;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.item-card:hover {
+  transform: translateY(-5px);
 }
 
 .item-card img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-right: 20px;
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 .item-card p {
-  font-size: 14px;
-  color: #666;
+  margin: 5px 0;
+  color: #555;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .my-profile {
-    padding: 10px;
-  }
+.item-card p strong {
+  color: #333;
+}
 
-  .profile-info,
-  .profile-items {
-    padding: 15px;
-  }
+.item-card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #007BFF;
+  text-decoration: none;
+}
 
-  .item-card img {
-    width: 60px;
-    height: 60px;
-  }
+.item-card a:hover {
+  text-decoration: underline;
 }

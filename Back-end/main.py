@@ -31,4 +31,3 @@ app.include_router(qa.router)
 app.include_router(user_rating.router)
 app.include_router(bid.router)
 app.include_router(save.router)
-

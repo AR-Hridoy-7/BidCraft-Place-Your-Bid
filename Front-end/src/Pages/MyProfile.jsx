@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CSS/MyProfile.css';
+import { Link } from 'react-router-dom';
 
 const MyProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -38,6 +39,7 @@ const MyProfile = () => {
     <div className="my-profile">
       <div className="profile-header">
         <h2>My Profile</h2>
+        <Link to="/changepassword" className="change-password-link">Change Password</Link>
       </div>
       <div className="profile-details">
         <div className="profile-info">
@@ -53,9 +55,9 @@ const MyProfile = () => {
               <img src={`data:image/jpeg;base64,${item.pic}`} alt={item.name} />
               <p><strong>Name:</strong> {item.name}</p>
               <p><strong>Category:</strong> {item.category}</p>
-              <p><strong>Start Date:</strong> {item.auction_start_date}</p>
+              <p><strong>Starting Price:</strong> {item.starting_price}</p>
               <p><strong>End Date:</strong> {item.auction_end_date}</p>
-              {/* Add more item details here */}
+              <Link to={`/product/${item.item_id}`}>View Details</Link>
             </div>
           ))}
         </div>
