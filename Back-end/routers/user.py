@@ -25,6 +25,12 @@ def create_user(request : schemas.User,db: Session = Depends(database.get_db)):
 
 @router.post('/list_add',status_code=status.HTTP_201_CREATED)
 def create_user(request : schemas.Address,db: Session = Depends(database.get_db),current_user = Depends(oauth2.getCurrentUser)):
+    user = db.query(models.User).filter(models.User.phone==request.phone).first()
+    if user:
+        raise HTTPException(status_code=status.HTTP_208_ALREADY_REPORTED,detail='You have a accout with this phone')
+    user = db.query(models.User).filter(models.User.email==request.email).first()
+    if user:
+        raise HTTPException(status_code=status.HTTP_208_ALREADY_REPORTED,detail='You have a accout with this email')
     new_add =  user.list_add(request,db,current_user.user_id)
     if not new_add:
         raise HTTPException(status_code=status.HTTP_204_NO_CONTENT,detail=f'User not created')
