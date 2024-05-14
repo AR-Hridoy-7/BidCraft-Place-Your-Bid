@@ -88,6 +88,7 @@ const BidDisplay = ({ product }) => {
                     <th>User Name</th>
                     <th>Bid Amount</th>
                     <th>Bid Time</th>
+                    <th>Contact</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -96,6 +97,7 @@ const BidDisplay = ({ product }) => {
                       <td>{bid.user.name}</td>
                       <td>${bid.bid_amount}</td>
                       <td>{bid.bid_time}</td>
+                      <td>{bid.user.phone}</td>
                     </tr>
                   ))}
                 </tbody>
