@@ -5,7 +5,6 @@ import no_img from '../Assets/no_img2.png';
 import { useNavigate } from 'react-router-dom';
 
 const BidDisplay = ({ product }) => {
-  const { addToCart } = useContext(ShopContext);
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining(product.auction_end_date));
   const [showBidHistory, setShowBidHistory] = useState(false);
   const [bidHistory, setBidHistory] = useState([]);
@@ -30,11 +29,16 @@ const BidDisplay = ({ product }) => {
 
   function getTimeRemaining(endTime) {
     const total = Date.parse(endTime) - Date.parse(new Date());
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-    const days = Math.floor(total / (1000 * 60 * 60 * 24));
-
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+    let days = 0;
+    if (total > 0) {
+      seconds = Math.floor((total / 1000) % 60);
+      minutes = Math.floor((total / 1000 / 60) % 60);
+      hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+      days = Math.floor(total / (1000 * 60 * 60 * 24));
+    }
     return {
       total,
       days,
@@ -67,7 +71,12 @@ const BidDisplay = ({ product }) => {
       navigate('/login');
       return;
     }
-
+    const time = timeLeft.total;
+    if (!(time > 0)) {
+      alert('Auction has ended.');
+      return;
+    }
+    console.log(time);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -98,6 +107,7 @@ const BidDisplay = ({ product }) => {
       console.error('Error placing bid:', error);
     }
   };
+
   return (
     <div className="biddisplay-container">
       <div className="biddisplay-image">
@@ -112,7 +122,7 @@ const BidDisplay = ({ product }) => {
           {timeLeft.total <= 0 ? (
             <p>Ended</p>
           ) : (
-            <p><strong>Time Left: </strong>{timeLeft.days} days {timeLeft.hours} hours {timeLeft.minutes} minutes {timeLeft.seconds} seconds</p>
+            <p><strong>Time Left: </strong><strong>{timeLeft.days} </strong>days <strong>{timeLeft.hours} </strong>hours <strong>{timeLeft.minutes} </strong>minutes <strong>{timeLeft.seconds} </strong>seconds</p>
           )}
           <div className="bid-section">
             <p><strong>Enter your available bid (it's free)</strong></p>

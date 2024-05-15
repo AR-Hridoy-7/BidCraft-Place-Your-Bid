@@ -17,9 +17,15 @@
 }
 
 .biddisplay-image img {
-  max-width: 100%;
-  height: auto;
+  /* max-width: 100%; */
+  width: auto;
+  height: 500px;
   border-radius: 8px;
+}
+
+.biddisplay-image img:hover{
+  transform: scale(1.05);
+  transition: .6s;
 }
 
 .biddisplay-details {

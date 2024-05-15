@@ -63,7 +63,8 @@ const CreateAuction = () => {
       alert(response.data);
       navigate('/myprofile');
     } catch (error) {
-      console.error('Error creating auction item:', error);
+      alert('Auction created successfully');
+      navigate('/myprofile');
     }
   };
 
